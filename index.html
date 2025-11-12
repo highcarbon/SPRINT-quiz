@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPRiNT Work Skills Quiz</title>
+    <title>SPRINT Work Skills Quiz</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
         h1 { text-align: center; color: #333; }
@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-    <h1>SPRiNT Work Skills Quiz</h1>
+    <h1>SPRINT Work Skills Quiz</h1>
     <div class="instructions">
         <p>Rate how accurately each statement describes you <em>at work</em>. Be honest—there are no right or wrong answers.</p>
         <p><strong>Scale:</strong> 1 = Strongly Disagree &nbsp; ... &nbsp; 7 = Strongly Agree</p>
@@ -276,7 +276,7 @@
 
     <div id="emailPrompt">
         <h2>Enter Your Email</h2>
-        <p>We’ll send your full SPRiNT profile instantly.</p>
+        <p>We’ll send your full SPRINT profile instantly.</p>
         <input type="email" id="userEmail" placeholder="you@example.com" required>
         <button id="sendEmail">Send My Results</button>
         <p class="loading" id="loadingMsg" style="display:none;">Sending...</p>
@@ -324,7 +324,7 @@
                     levels[trait] = raw <= 10 ? 'Low' : raw <= 17 ? 'Mid' : 'High';
                 });
 
-                sprintResult = 'SPRiNT Work Skills Profile\n\n';
+                sprintResult = 'SPRINT Work Skills Profile\n\n';
                 sprintResult += 'Structural Orientation: ' + levels.S + '\n';
                 sprintResult += 'Problem-Solving: ' + levels.P + '\n';
                 sprintResult += 'Resource Strategy: ' + levels.R + '\n';
@@ -346,10 +346,10 @@
                 document.getElementById('loadingMsg').style.display = 'block';
                 document.getElementById('sendEmail').disabled = true;
 
-                const body = sprintResult + `\n\n---\nSent via SPRiNT Quiz`;
+                const body = sprintResult + `\n\n---\nSent via SPRINT Quiz`;
 
                 const form = document.createElement('form');
-                form.action = 'https://formsubmit.co/iamprettyhelpful@gmail.com';
+                form.action = 'https://formsubmit.co/highcarbonconsulting@gmail.com';
                 form.method = 'POST';
                 form.style.display = 'none';
 
@@ -362,13 +362,13 @@
                 // CC to you
                 const inputCC = document.createElement('input');
                 inputCC.name = '_cc';
-                inputCC.value = 'iamprettyhelpful@gmail.com';
+                inputCC.value = 'highcarbonconsulting@gmail.com';
                 form.appendChild(inputCC);
 
                 // Subject
                 const inputSubject = document.createElement('input');
                 inputSubject.name = '_subject';
-                inputSubject.value = 'Your SPRiNT Profile Results';
+                inputSubject.value = 'Your SPRINT Profile Results';
                 form.appendChild(inputSubject);
 
                 // Body
