@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPRINT Work Skills Quiz</title>
+    <title>SPRiNT Work Skills Quiz</title>
     <style>
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
         h1 { text-align: center; color: #333; }
@@ -19,10 +19,11 @@
         #emailPrompt input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
         #emailPrompt button { background: #2196F3; }
         #emailPrompt button:hover { background: #1976D2; }
+        .loading { color: #666; font-style: italic; }
     </style>
 </head>
 <body>
-    <h1>SPRINT Work Skills Quiz</h1>
+    <h1>SPRiNT Work Skills Quiz</h1>
     <div class="instructions">
         <p>Rate how accurately each statement describes you <em>at work</em>. Be honest—there are no right or wrong answers.</p>
         <p><strong>Scale:</strong> 1 = Strongly Disagree &nbsp; ... &nbsp; 7 = Strongly Agree</p>
@@ -275,110 +276,120 @@
 
     <div id="emailPrompt">
         <h2>Enter Your Email</h2>
-        <p>We’ll send your SPRINT profile instantly.</p>
+        <p>We’ll send your full SPRiNT profile instantly.</p>
         <input type="email" id="userEmail" placeholder="you@example.com" required>
         <button id="sendEmail">Send My Results</button>
+        <p class="loading" id="loadingMsg" style="display:none;">Sending...</p>
         <p style="font-size: 0.8em; color: #666; margin-top: 10px;">
             Your email is private. Results only.
         </p>
     </div>
 
     <script>
-        // Mapping: Current Q# → Original Q# for scoring
-        const mapping = {
-            q1:17, q2:10, q3:13, q4:24, q5:4,  q6:12, q7:6,  q8:21,
-            q9:11, q10:8, q11:18, q12:15, q13:1, q14:23, q15:9, q16:2,
-            q17:19, q18:14, q19:16, q20:22, q21:3, q22:5, q23:20, q24:7
-        };
-        const reverses = [2,3,6,7,10,14,18,20,22,24];
-        const traits = { S:[1,2,3,4], P:[5,6,7,8], R:[9,10,11,12], I:[13,14,15,16], N:[17,18,19,20], T:[21,22,23,24] };
+        // Wait for DOM
+        document.addEventListener('DOMContentLoaded', function () {
+            const mapping = {
+                q1:17, q2:10, q3:13, q4:24, q5:4,  q6:12, q7:6,  q8:21,
+                q9:11, q10:8, q11:18, q12:15, q13:1, q14:23, q15:9, q16:2,
+                q17:19, q18:14, q19:16, q20:22, q21:3, q22:5, q23:20, q24:7
+            };
+            const reverses = [2,3,6,7,10,14,18,20,22,24];
+            const traits = { S:[1,2,3,4], P:[5,6,7,8], R:[9,10,11,12], I:[13,14,15,16], N:[17,18,19,20], T:[21,22,23,24] };
 
-        document.getElementById('quizForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const responses = {};
-            for (let [key, value] of formData.entries()) {
-                responses[key] = parseInt(value);
-            }
+            let sprintResult = '';
 
-            // Calculate raw scores
-            const scores = {};
-            Object.keys(traits).forEach(trait => {
-                let sum = 0;
-                traits[trait].forEach(origQ => {
-                    const newQ = Object.keys(mapping).find(k => mapping[k] === origQ);
-                    let score = responses[newQ] || 4;
-                    if (reverses.includes(origQ)) score = 8 - score;
-                    sum += score;
+            document.getElementById('quizForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const responses = {};
+                for (let [key, value] of formData.entries()) {
+                    responses[key] = parseInt(value);
+                }
+
+                const scores = {};
+                Object.keys(traits).forEach(trait => {
+                    let sum = 0;
+                    traits[trait].forEach(origQ => {
+                        const newQ = Object.keys(mapping).find(k => mapping[k] === origQ);
+                        let score = responses[newQ] || 4;
+                        if (reverses.includes(origQ)) score = 8 - score;
+                        sum += score;
+                    });
+                    scores[trait] = sum;
                 });
-                scores[trait] = sum;
+
+                const levels = {};
+                Object.keys(scores).forEach(trait => {
+                    const raw = scores[trait];
+                    levels[trait] = raw <= 10 ? 'Low' : raw <= 17 ? 'Mid' : 'High';
+                });
+
+                sprintResult = 'SPRiNT Work Skills Profile\n\n';
+                sprintResult += 'Structural Orientation: ' + levels.S + '\n';
+                sprintResult += 'Problem-Solving: ' + levels.P + '\n';
+                sprintResult += 'Resource Strategy: ' + levels.R + '\n';
+                sprintResult += 'Innovation Bias: ' + levels.I + '\n';
+                sprintResult += 'Narrative Reach: ' + levels.N + '\n';
+                sprintResult += 'Team Orientation: ' + levels.T + '\n';
+
+                document.getElementById('emailPrompt').style.display = 'block';
+                document.getElementById('emailPrompt').scrollIntoView({ behavior: 'smooth' });
             });
 
-            // Convert to levels
-            const levels = {};
-            Object.keys(scores).forEach(trait => {
-                const raw = scores[trait];
-                levels[trait] = raw <= 10 ? 'Low' : raw <= 17 ? 'Mid' : 'High';
+            document.getElementById('sendEmail').addEventListener('click', function() {
+                const email = document.getElementById('userEmail').value.trim();
+                if (!email || !email.includes('@')) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+
+                document.getElementById('loadingMsg').style.display = 'block';
+                document.getElementById('sendEmail').disabled = true;
+
+                const body = sprintResult + `\n\n---\nSent via SPRiNT Quiz`;
+
+                const form = document.createElement('form');
+                form.action = 'https://formsubmit.co/iamprettyhelpful@gmail.com';
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                // Send to user
+                const inputTo = document.createElement('input');
+                inputTo.name = 'email';
+                inputTo.value = email;
+                form.appendChild(inputTo);
+
+                // CC to you
+                const inputCC = document.createElement('input');
+                inputCC.name = '_cc';
+                inputCC.value = 'iamprettyhelpful@gmail.com';
+                form.appendChild(inputCC);
+
+                // Subject
+                const inputSubject = document.createElement('input');
+                inputSubject.name = '_subject';
+                inputSubject.value = 'Your SPRiNT Profile Results';
+                form.appendChild(inputSubject);
+
+                // Body
+                const inputBody = document.createElement('input');
+                inputBody.name = 'message';
+                inputBody.value = body;
+                form.appendChild(inputBody);
+
+                // Prevent redirect
+                const inputNext = document.createElement('input');
+                inputNext.name = '_next';
+                inputNext.value = window.location.href;
+                form.appendChild(inputNext);
+
+                document.body.appendChild(form);
+                form.submit();
+
+                setTimeout(() => {
+                    document.getElementById('emailPrompt').innerHTML = '<p style="color:green;">Results sent! Check your inbox.</p>';
+                }, 1000);
             });
-
-            // Build profile text
-            let profileText = 'SPRINT Work Skills Profile\n\n';
-            Object.keys(levels).forEach(trait => {
-                profileText += `${trait}: ${levels[trait]}\n`;
-            });
-
-            // Store for email
-            window.SPRINTResult = profileText;
-
-            // Show email prompt
-            document.getElementById('emailPrompt').style.display = 'block';
-            document.getElementById('emailPrompt').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Send email
-        document.getElementById('sendEmail').addEventListener('click', function() {
-            const email = document.getElementById('userEmail').value.trim();
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            const body = window.sprintResult + `\n\n---\nSent via SPRINT Quiz`;
-
-            const form = document.createElement('form');
-            form.action = 'https://formsubmit.co/highcarbonconsulting@gmail.com';
-            form.method = 'POST';
-            form.style.display = 'none';
-
-            // User email
-            const inputEmail = document.createElement('input');
-            inputEmail.name = 'email';
-            inputEmail.value = email;
-            form.appendChild(inputEmail);
-
-            // CC to you
-            const inputCC = document.createElement('input');
-            inputCC.name = '_cc';
-            inputCC.value = 'highcarbonconsulting@gmail.com';
-            form.appendChild(inputCC);
-
-            // Subject
-            const inputSubject = document.createElement('input');
-            inputSubject.name = '_subject';
-            inputSubject.value = 'Your SPRINT Profile Results';
-            form.appendChild(inputSubject);
-
-            // Body
-            const inputBody = document.createElement('input');
-            inputBody.name = 'message';
-            inputBody.value = body;
-            form.appendChild(inputBody);
-
-            document.body.appendChild(form);
-            form.submit();
-
-            alert('Results sent! Check your inbox.');
-            document.getElementById('emailPrompt').innerHTML = '<p style="color:green;">Results sent! Check your email.</p>';
         });
     </script>
 </body>
