@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPRINT Work Skills Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1 { text-align: center; color: #333; }
+        .instructions { text-align: center; background: #e7f3ff; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .question { margin-bottom: 20px; padding: 15px; background: white; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .question label { font-weight: bold; display: block; margin-bottom: 10px; }
+        .scale { display: flex; justify-content: space-between; margin: 10px 0; }
+        .scale label { text-align: center; flex: 1; margin: 0 2px; font-size: 0.9em; }
+        .scale input[type="radio"] { margin-right: 5px; }
+        button { background: #4CAF50; color: white; padding: 15px 30px; border: none; cursor: pointer; margin: 20px auto; display: block; font-size: 18px; border-radius: 5px; }
+        button:hover { background: #45a049; }
+        #emailPrompt { margin-top: 20px; padding: 20px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; display: none; }
+        #emailPrompt input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
+        #emailPrompt button { background: #2196F3; }
+        #emailPrompt button:hover { background: #1976D2; }
+    </style>
+</head>
+<body>
+    <h1>SPRINT Work Skills Quiz</h1>
+    <div class="instructions">
+        <p>Rate how accurately each statement describes you <em>at work</em>. Be honest—there are no right or wrong answers.</p>
+        <p><strong>Scale:</strong> 1 = Strongly Disagree &nbsp; ... &nbsp; 7 = Strongly Agree</p>
+    </div>
+
+    <form id="quizForm">
+        <!-- 24 MIXED QUESTIONS -->
+        <div class="question"><label>Q1: I love presenting ideas and pitching to groups.</label><div class="scale">
+            <label><input type="radio" name="q1" value="1" required>1</label>
+            <label><input type="radio" name="q1" value="2">2</label>
+            <label><input type="radio" name="q1" value="3">3</label>
+            <label><input type="radio" name="q1" value="4">4</label>
+            <label><input type="radio" name="q1" value="5">5</label>
+            <label><input type="radio" name="q1" value="6">6</label>
+            <label><input type="radio" name="q1" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q2: I prefer to buy the best equipment, even if it costs more.</label><div class="scale">
+            <label><input type="radio" name="q2" value="1" required>1</label>
+            <label><input type="radio" name="q2" value="2">2</label>
+            <label><input type="radio" name="q2" value="3">3</label>
+            <label><input type="radio" name="q2" value="4">4</label>
+            <label><input type="radio" name="q2" value="5">5</label>
+            <label><input type="radio" name="q2" value="6">6</label>
+            <label><input type="radio" name="q2" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q3: I get excited about experimenting with unproven ideas.</label><div class="scale">
+            <label><input type="radio" name="q3" value="1" required>1</label>
+            <label><input type="radio" name="q3" value="2">2</label>
+            <label><input type="radio" name="q3" value="3">3</label>
+            <label><input type="radio" name="q3" value="4">4</label>
+            <label><input type="radio" name="q3" value="5">5</label>
+            <label><input type="radio" name="q3" value="6">6</label>
+            <label><input type="radio" name="q3" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q4: I work best when fully in control of my own workflow.</label><div class="scale">
+            <label><input type="radio" name="q4" value="1" required>1</label>
+            <label><input type="radio" name="q4" value="2">2</label>
+            <label><input type="radio" name="q4" value="3">3</label>
+            <label><input type="radio" name="q4" value="4">4</label>
+            <label><input type="radio" name="q4" value="5">5</label>
+            <label><input type="radio" name="q4" value="6">6</label>
+            <label><input type="radio" name="q4" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q5: I prefer clear rules and predictable expectations.</label><div class="scale">
+            <label><input type="radio" name="q5" value="1" required>1</label>
+            <label><input type="radio" name="q5" value="2">2</label>
+            <label><input type="radio" name="q5" value="3">3</label>
+            <label><input type="radio" name="q5" value="4">4</label>
+            <label><input type="radio" name="q5" value="5">5</label>
+            <label><input type="radio" name="q5" value="6">6</label>
+            <label><input type="radio" name="q5" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q6: Reusing or repurposing old materials feels natural to me.</label><div class="scale">
+            <label><input type="radio" name="q6" value="1" required>1</label>
+            <label><input type="radio" name="q6" value="2">2</label>
+            <label><input type="radio" name="q6" value="3">3</label>
+            <label><input type="radio" name="q6" value="4">4</label>
+            <label><input type="radio" name="q6" value="5">5</label>
+            <label><input type="radio" name="q6" value="6">6</label>
+            <label><input type="radio" name="q6" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q7: I trust my gut feelings when analyzing complex issues.</label><div class="scale">
+            <label><input type="radio" name="q7" value="1" required>1</label>
+            <label><input type="radio" name="q7" value="2">2</label>
+            <label><input type="radio" name="q7" value="3">3</label>
+            <label><input type="radio" name="q7" value="4">4</label>
+            <label><input type="radio" name="q7" value="5">5</label>
+            <label><input type="radio" name="q7" value="6">6</label>
+            <label><input type="radio" name="q7" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q8: I’m most effective when delegating and coordinating others.</label><div class="scale">
+            <label><input type="radio" name="q8" value="1" required>1</label>
+            <label><input type="radio" name="q8" value="2">2</label>
+            <label><input type="radio" name="q8" value="3">3</label>
+            <label><input type="radio" name="q8" value="4">4</label>
+            <label><input type="radio" name="q8" value="5">5</label>
+            <label><input type="radio" name="q8" value="6">6</label>
+            <label><input type="radio" name="q8" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q9: I actively seek out deals, discounts, or second-hand options.</label><div class="scale">
+            <label><input type="radio" name="q9" value="1" required>1</label>
+            <label><input type="radio" name="q9" value="2">2</label>
+            <label><input type="radio" name="q9" value="3">3</label>
+            <label><input type="radio" name="q9" value="4">4</label>
+            <label><input type="radio" name="q9" value="5">5</label>
+            <label><input type="radio" name="q9" value="6">6</label>
+            <label><input type="radio" name="q9" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q10: The best solutions come from eliminating unnecessary variables.</label><div class="scale">
+            <label><input type="radio" name="q10" value="1" required>1</label>
+            <label><input type="radio" name="q10" value="2">2</label>
+            <label><input type="radio" name="q10" value="3">3</label>
+            <label><input type="radio" name="q10" value="4">4</label>
+            <label><input type="radio" name="q10" value="5">5</label>
+            <label><input type="radio" name="q10" value="6">6</label>
+            <label><input type="radio" name="q10" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q11: I prefer to observe meetings quietly and take notes.</label><div class="scale">
+            <label><input type="radio" name="q11" value="1" required>1</label>
+            <label><input type="radio" name="q11" value="2">2</label>
+            <label><input type="radio" name="q11" value="3">3</label>
+            <label><input type="radio" name="q11" value="4">4</label>
+            <label><input type="radio" name="q11" value="5">5</label>
+            <label><input type="radio" name="q11" value="6">6</label>
+            <label><input type="radio" name="q11" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q12: Learning new skills is more important than mastering one thing.</label><div class="scale">
+            <label><input type="radio" name="q12" value="1" required>1</label>
+            <label><input type="radio" name="q12" value="2">2</label>
+            <label><input type="radio" name="q12" value="3">3</label>
+            <label><input type="radio" name="q12" value="4">4</label>
+            <label><input type="radio" name="q12" value="5">5</label>
+            <label><input type="radio" name="q12" value="6">6</label>
+            <label><input type="radio" name="q12" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q13: I always follow official procedures, even if they slow things down.</label><div class="scale">
+            <label><input type="radio" name="q13" value="1" required>1</label>
+            <label><input type="radio" name="q13" value="2">2</label>
+            <label><input type="radio" name="q13" value="3">3</label>
+            <label><input type="radio" name="q13" value="4">4</label>
+            <label><input type="radio" name="q13" value="5">5</label>
+            <label><input type="radio" name="q13" value="6">6</label>
+            <label><input type="radio" name="q13" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q14: I build momentum by aligning people around a shared goal.</label><div class="scale">
+            <label><input type="radio" name="q14" value="1" required>1</label>
+            <label><input type="radio" name="q14" value="2">2</label>
+            <label><input type="radio" name="q14" value="3">3</label>
+            <label><input type="radio" name="q14" value="4">4</label>
+            <label><input type="radio" name="q14" value="5">5</label>
+            <label><input type="radio" name="q14" value="6">6</label>
+            <label><input type="radio" name="q14" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q15: I can make do with whatever tools are on hand.</label><div class="scale">
+            <label><input type="radio" name="q15" value="1" required>1</label>
+            <label><input type="radio" name="q15" value="2">2</label>
+            <label><input type="radio" name="q15" value="3">3</label>
+            <label><input type="radio" name="q15" value="4">4</label>
+            <label><input type="radio" name="q15" value="5">5</label>
+            <label><input type="radio" name="q15" value="6">6</label>
+            <label><input type="radio" name="q15" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q16: Bureaucracy frustrates me—I look for ways around it.</label><div class="scale">
+            <label><input type="radio" name="q16" value="1" required>1</label>
+            <label><input type="radio" name="q16" value="2">2</label>
+            <label><input type="radio" name="q16" value="3">3</label>
+            <label><input type="radio" name="q16" value="4">4</label>
+            <label><input type="radio" name="q16" value="5">5</label>
+            <label><input type="radio" name="q16" value="6">6</label>
+            <label><input type="radio" name="q16" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q17: I naturally reframe challenges into inspiring stories or visions.</label><div class="scale">
+            <label><input type="radio" name="q17" value="1" required>1</label>
+            <label><input type="radio" name="q17" value="2">2</label>
+            <label><input type="radio" name="q17" value="3">3</label>
+            <label><input type="radio" name="q17" value="4">4</label>
+            <label><input type="radio" name="q17" value="5">5</label>
+            <label><input type="radio" name="q17" value="6">6</label>
+            <label><input type="radio" name="q17" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q18: I’d rather perfect a known process than try something risky.</label><div class="scale">
+            <label><input type="radio" name="q18" value="1" required>1</label>
+            <label><input type="radio" name="q18" value="2">2</label>
+            <label><input type="radio" name="q18" value="3">3</label>
+            <label><input type="radio" name="q18" value="4">4</label>
+            <label><input type="radio" name="q18" value="5">5</label>
+            <label><input type="radio" name="q18" value="6">6</label>
+            <label><input type="radio" name="q18" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q19: I enjoy forecasting trends and imagining future possibilities.</label><div class="scale">
+            <label><input type="radio" name="q19" value="1" required>1</label>
+            <label><input type="radio" name="q19" value="2">2</label>
+            <label><input type="radio" name="q19" value="3">3</label>
+            <label><input type="radio" name="q19" value="4">4</label>
+            <label><input type="radio" name="q19" value="5">5</label>
+            <label><input type="radio" name="q19" value="6">6</label>
+            <label><input type="radio" name="q19" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q20: I prefer to handle tasks myself to ensure they’re done right.</label><div class="scale">
+            <label><input type="radio" name="q20" value="1" required>1</label>
+            <label><input type="radio" name="q20" value="2">2</label>
+            <label><input type="radio" name="q20" value="3">3</label>
+            <label><input type="radio" name="q20" value="4">4</label>
+            <label><input type="radio" name="q20" value="5">5</label>
+            <label><input type="radio" name="q20" value="6">6</label>
+            <label><input type="radio" name="q20" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q21: Systems should be flexible and adjusted when needed.</label><div class="scale">
+            <label><input type="radio" name="q21" value="1" required>1</label>
+            <label><input type="radio" name="q21" value="2">2</label>
+            <label><input type="radio" name="q21" value="3">3</label>
+            <label><input type="radio" name="q21" value="4">4</label>
+            <label><input type="radio" name="q21" value="5">5</label>
+            <label><input type="radio" name="q21" value="6">6</label>
+            <label><input type="radio" name="q21" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q22: I solve problems by breaking them into small, logical steps.</label><div class="scale">
+            <label><input type="radio" name="q22" value="1" required>1</label>
+            <label><input type="radio" name="q22" value="2">2</label>
+            <label><input type="radio" name="q22" value="3">3</label>
+            <label><input type="radio" name="q22" value="4">4</label>
+            <label><input type="radio" name="q22" value="5">5</label>
+            <label><input type="radio" name="q22" value="6">6</label>
+            <label><input type="radio" name="q22" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q23: I influence others through data, examples, or quiet consistency.</label><div class="scale">
+            <label><input type="radio" name="q23" value="1" required>1</label>
+            <label><input type="radio" name="q23" value="2">2</label>
+            <label><input type="radio" name="q23" value="3">3</label>
+            <label><input type="radio" name="q23" value="4">4</label>
+            <label><input type="radio" name="q23" value="5">5</label>
+            <label><input type="radio" name="q23" value="6">6</label>
+            <label><input type="radio" name="q23" value="7">7</label>
+        </div></div>
+
+        <div class="question"><label>Q24: Adding playful or random ideas often leads to breakthroughs.</label><div class="scale">
+            <label><input type="radio" name="q24" value="1" required>1</label>
+            <label><input type="radio" name="q24" value="2">2</label>
+            <label><input type="radio" name="q24" value="3">3</label>
+            <label><input type="radio" name="q24" value="4">4</label>
+            <label><input type="radio" name="q24" value="5">5</label>
+            <label><input type="radio" name="q24" value="6">6</label>
+            <label><input type="radio" name="q24" value="7">7</label>
+        </div></div>
+
+        <button type="submit">Submit & Email Results</button>
+    </form>
+
+    <div id="emailPrompt">
+        <h2>Enter Your Email</h2>
+        <p>We’ll send your SPRINT profile instantly.</p>
+        <input type="email" id="userEmail" placeholder="you@example.com" required>
+        <button id="sendEmail">Send My Results</button>
+        <p style="font-size: 0.8em; color: #666; margin-top: 10px;">
+            Your email is private. Results only.
+        </p>
+    </div>
+
+    <script>
+        // Mapping: Current Q# → Original Q# for scoring
+        const mapping = {
+            q1:17, q2:10, q3:13, q4:24, q5:4,  q6:12, q7:6,  q8:21,
+            q9:11, q10:8, q11:18, q12:15, q13:1, q14:23, q15:9, q16:2,
+            q17:19, q18:14, q19:16, q20:22, q21:3, q22:5, q23:20, q24:7
+        };
+        const reverses = [2,3,6,7,10,14,18,20,22,24];
+        const traits = { S:[1,2,3,4], P:[5,6,7,8], R:[9,10,11,12], I:[13,14,15,16], N:[17,18,19,20], T:[21,22,23,24] };
+
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const responses = {};
+            for (let [key, value] of formData.entries()) {
+                responses[key] = parseInt(value);
+            }
+
+            // Calculate raw scores
+            const scores = {};
+            Object.keys(traits).forEach(trait => {
+                let sum = 0;
+                traits[trait].forEach(origQ => {
+                    const newQ = Object.keys(mapping).find(k => mapping[k] === origQ);
+                    let score = responses[newQ] || 4;
+                    if (reverses.includes(origQ)) score = 8 - score;
+                    sum += score;
+                });
+                scores[trait] = sum;
+            });
+
+            // Convert to levels
+            const levels = {};
+            Object.keys(scores).forEach(trait => {
+                const raw = scores[trait];
+                levels[trait] = raw <= 10 ? 'Low' : raw <= 17 ? 'Mid' : 'High';
+            });
+
+            // Build profile text
+            let profileText = 'SPRINT Work Skills Profile\n\n';
+            Object.keys(levels).forEach(trait => {
+                profileText += `${trait}: ${levels[trait]}\n`;
+            });
+
+            // Store for email
+            window.SPRINTResult = profileText;
+
+            // Show email prompt
+            document.getElementById('emailPrompt').style.display = 'block';
+            document.getElementById('emailPrompt').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Send email
+        document.getElementById('sendEmail').addEventListener('click', function() {
+            const email = document.getElementById('userEmail').value.trim();
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            const body = window.sprintResult + `\n\n---\nSent via SPRINT Quiz`;
+
+            const form = document.createElement('form');
+            form.action = 'https://formsubmit.co/highcarbonconsulting@gmail.com';
+            form.method = 'POST';
+            form.style.display = 'none';
+
+            // User email
+            const inputEmail = document.createElement('input');
+            inputEmail.name = 'email';
+            inputEmail.value = email;
+            form.appendChild(inputEmail);
+
+            // CC to you
+            const inputCC = document.createElement('input');
+            inputCC.name = '_cc';
+            inputCC.value = 'highcarbonconsulting@gmail.com';
+            form.appendChild(inputCC);
+
+            // Subject
+            const inputSubject = document.createElement('input');
+            inputSubject.name = '_subject';
+            inputSubject.value = 'Your SPRINT Profile Results';
+            form.appendChild(inputSubject);
+
+            // Body
+            const inputBody = document.createElement('input');
+            inputBody.name = 'message';
+            inputBody.value = body;
+            form.appendChild(inputBody);
+
+            document.body.appendChild(form);
+            form.submit();
+
+            alert('Results sent! Check your inbox.');
+            document.getElementById('emailPrompt').innerHTML = '<p style="color:green;">Results sent! Check your email.</p>';
+        });
+    </script>
+</body>
+</html>
